@@ -6,7 +6,7 @@
             </a>
         </div>
         <div class="nav-item expand-item">
-            search
+            <slot></slot>
         </div>
         <div class="flex-item">
             <div class="nav-item">
@@ -61,13 +61,15 @@
             height: 64px;
             white-space: nowrap;
             cursor: pointer;
+            font-size: 14px;
             &.first-item {
                 padding-left: 24px;
             }
             &.expand-item {
                 flex-grow: 1;
+                cursor: default;
             }
-            &:hover {
+            &:not(.expand-item):hover {
                 color: $primary-color;
             }
         }

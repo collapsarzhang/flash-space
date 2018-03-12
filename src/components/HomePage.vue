@@ -1,6 +1,8 @@
 <template>
-    <div id="search-page">
-        <header-component></header-component>
+    <div id="home-page">
+        <header-component>
+            <div @click="clickSlot">{{msg}}</div>
+        </header-component>
         <div id="body">
             <home-page-search-component></home-page-search-component>
             <div class="home-page-feature">
@@ -76,13 +78,18 @@
             'header-component': Header,
             'footer-component': Footer,
             'home-page-search-component': HomePageSearch
+        },
+        methods: {
+            clickSlot: function() {
+                console.log('clickSlot')
+            }
         }
     }
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
-    #search-page {
+    #home-page {
         min-height: 100vh;
         width: 100%;
         padding-top: 64px;

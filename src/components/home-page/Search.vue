@@ -15,14 +15,14 @@
                                @blur="resetSearchLocationIfNotSelected"
                                type="text"
                                placeholder="Where do you want your space?">
-                        <div class="location-prediction" v-show="locationPredications">
-                            <div v-for="prediction in locationPredications"
-                                 :key="prediction.placeId" class="prediction-item"
-                                 @mousedown.prevent="selectPrediction(prediction)"
-                            >
-                                <span class="main-part">{{prediction.mainText}}</span>
-                                <span class="additional-part">{{prediction.secondaryText}}</span>
-                            </div>
+                    </div>
+                    <div class="location-prediction" v-show="locationPredications">
+                        <div v-for="prediction in locationPredications"
+                             :key="prediction.placeId" class="prediction-item"
+                             @mousedown.prevent="selectPrediction(prediction)"
+                        >
+                            <span class="main-part">{{prediction.mainText}}</span>
+                            <span class="additional-part">{{prediction.secondaryText}}</span>
                         </div>
                     </div>
                     <div class="form-item project-type">
@@ -34,7 +34,8 @@
                             <div class="form-item-icon selection-icon"></div>
                         </div>
                         <div class="dropdown" v-show="showProjectTypeDropdown">
-                            <div class="item" v-for="projectType in projectTypes" :key="projectType.name" @click.prevent="selectProjectType($event, projectType)">
+                            <div class="item" v-for="projectType in projectTypes" :key="projectType.name"
+                                 @click.prevent="selectProjectType($event, projectType)">
                                 <div class="name">{{projectType.name}}</div>
                                 <ul class="examples">
                                     <li v-for="example in projectType.examples" :key="example">
@@ -66,6 +67,7 @@
 <script>
     import jQuery from 'jquery'
     import _ from 'lodash'
+
     let google = window.google
     export default {
         name: 'HomePageSearch',
@@ -118,6 +120,10 @@
             },
             goToSearchPage() {
                 console.log(this.searchLocation, this.searchProjectType)
+                this.$router.push({
+                    name: 'Search',
+                    query: {location: this.searchLocation, type: this.searchProjectType}
+                })
             },
             selectPrediction(predition) {
                 this.searchLocation = predition.description
@@ -137,7 +143,7 @@
                     this.resetSearchLocation()
                 }
             },
-            updatePlaceResult: _.debounce(function(event) {
+            updatePlaceResult: _.debounce(function (event) {
                 if (this.searchLocation.length === 0) {
                     this.locationPredications = undefined
                 }
@@ -160,9 +166,9 @@
                         }
                     })
                 }
-            }, 500)
+            }, 200)
         },
-        mounted: function() {
+        mounted: function () {
             jQuery('body').click(() => {
                 this.showProjectTypeDropdown = false
             })
@@ -215,6 +221,7 @@
             padding: 20px;
             margin: 10px auto;
             .search-form {
+                position: relative;
                 width: 768px;
                 text-align: left;
                 margin-bottom: 16px;
@@ -254,32 +261,44 @@
                         left: 16px;
                         background-image: url(https://d2kity9bboyw3j.cloudfront.net/assets/images/icons/icons_location-16390558.png);
                     }
-                    .location-prediction {
+                    &::after {
+                        content: '';
+                        display: block;
                         position: absolute;
-                        left: 15px;
-                        top: 75px;
-                        min-width: 305px;
-                        background-color: #fff;
-                        z-index: 9;
-                        .prediction-item {
-                            cursor: pointer;
-                            padding: 8px 14px;
-                            &.active-item {
-                                color: #fff;
-                                background-color: $primary-color;
-                            }
-                            &:hover {
-                                color: #fff;
-                                background-color: $primary-color;
-                            }
-                            .main-part {
-                                font-size: 14px;
-                                margin-right: 10px;
-                            }
-                            .additional-part {
-                                font-size: 12px;
-                                opacity: .69;
-                            }
+                        right: 0;
+                        top: 0;
+                        vertical-align: top;
+                        height: 100%;
+                        width: 80px;
+                        background-image: linear-gradient(to right, rgba(255, 255, 255, 0), #fff);
+                    }
+                }
+                .location-prediction {
+                    position: absolute;
+                    left: 15px;
+                    top: 75px;
+                    /*min-width: 305px;*/
+                    background-color: #fff;
+                    z-index: 9;
+                    .prediction-item {
+                        cursor: pointer;
+                        padding: 8px 14px;
+                        line-height: 16px;
+                        &.active-item {
+                            color: #fff;
+                            background-color: $primary-color;
+                        }
+                        &:hover {
+                            color: #fff;
+                            background-color: $primary-color;
+                        }
+                        .main-part {
+                            font-size: 14px;
+                            margin-right: 10px;
+                        }
+                        .additional-part {
+                            font-size: 12px;
+                            opacity: .69;
                         }
                     }
                 }

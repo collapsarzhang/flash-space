@@ -75,9 +75,34 @@
         &:last-of-type {
             margin-right: 0;
         }
+        &:hover {
+            background: $primary-active-color;
+        }
+        &:active {
+            box-shadow: inset 0px 2px 2px rgba(0,0,0,0.2);
+            background: $primary-active-color;
+        }
     }
 
     h3 {
         font-size: 24px;
     }
+
+    .VueCarousel {
+        .VueCarousel-navigation {
+            .VueCarousel-navigation-button {
+                color: #fff;
+                padding: 8px;
+                font-size: 24px;
+                filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.6));
+                &.VueCarousel-navigation-prev {
+                    transform: translateY(-50%);
+                }
+                &.VueCarousel-navigation-next {
+                    transform: translateY(-50%);
+                }
+            }
+        }
+    }
+
 </style>
