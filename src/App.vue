@@ -104,5 +104,10 @@
             }
         }
     }
+    
+    body.no-scroll {
+        position: fixed !important;
+        overflow-y: scroll !important;
+    }
 
 </style>

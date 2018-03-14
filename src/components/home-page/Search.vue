@@ -122,7 +122,7 @@
                 console.log(this.searchLocation, this.searchProjectType)
                 this.$router.push({
                     name: 'Search',
-                    query: {location: this.searchLocation, type: this.searchProjectType}
+                    query: {location: this.searchLocation, type: this.searchProjectType.name}
                 })
             },
             selectPrediction(predition) {

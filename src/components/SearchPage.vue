@@ -113,7 +113,7 @@
                 markers: [],
                 spaces: [],
                 mapSelectedSpace: undefined,
-                searchLocation: '',
+                searchLocation: 'Vancouver, BC, Canada',
                 locationPredications: undefined,
                 activePrediction: undefined,
                 selectedPrediction: undefined,
@@ -262,6 +262,10 @@
                     }
             })
 
+            if (this.$route.query.location && this.$route.query.location.length > 0) {
+                this.searchLocation = this.$route.query.location
+            }
+
             this.googleMap = new google.maps.Map(document.getElementById('google-map'), {
                 center: {lat: 49.246292, lng: -123.116226},
                 zoom: 12,
@@ -300,6 +304,16 @@
             this.googleMap.addListener('click', () => {
                 this.unSelectMapSpace()
             })
+
+            let geocoderService = new google.maps.Geocoder()
+            geocoderService.geocode({address: this.searchLocation}, (result, status) => {
+                if (status === google.maps.GeocoderStatus.OK && result.length > 0) {
+                    let viewport = result[0].geometry.viewport
+                    this.googleMap.fitBounds(viewport)
+                    this.updateMapData(viewport)
+                }
+            })
+
         }
     }
 </script>

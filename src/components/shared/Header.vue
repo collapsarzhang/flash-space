@@ -20,22 +20,32 @@
             Need Help?
         </div>
         <div class="flex-item">
-            <div class="nav-item">
+            <div class="nav-item" @click="showSignUpModal = true">
                 Sign Up
             </div>
-            <div class="nav-item">
+            <div class="nav-item" @click="showLoginModal = true">
                 Login
             </div>
+            <modal-component :show="showSignUpModal" @close="showSignUpModal = false"></modal-component>
+            <modal-component :show="showLoginModal" @close="showLoginModal = false"></modal-component>
         </div>
     </div>
 </template>
 
 <script>
+    import Modal from '@/components/shared/Modal'
     export default {
         name: 'Header',
         data() {
-            return {}
-        }
+            return {
+                showSignUpModal: false,
+                showLoginModal: false
+            }
+        },
+        components: {
+            'modal-component': Modal
+        },
+        methods: {}
     }
 </script>
 
