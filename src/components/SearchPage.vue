@@ -57,7 +57,7 @@
                     <!--<div class="filter-actions"></div>-->
                 <!--</div>-->
                 <div class="result-list-panel">
-                    <div class="result-list-item-wrapper" v-for="space in spaces">
+                    <div class="result-list-item-wrapper" v-for="space in spaces" v-bind:key="space.spaceId">
                         <div class="result-list-item" @mouseover="onHoverListSpace(space)">
                             <div class="list-item-image">
                                 <carousel :perPage="1"
@@ -313,7 +313,6 @@
                     this.updateMapData(viewport)
                 }
             })
-
         }
     }
 </script>

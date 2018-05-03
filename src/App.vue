@@ -18,11 +18,9 @@
         -moz-osx-font-smoothing: grayscale;
         color: #4a494b;
     }
-
     .flex-item {
         display: flex;
     }
-
     .home-page-section {
         max-width: 1024px;
         padding: 24px 0;
@@ -50,11 +48,9 @@
         padding: 8px;
         background: #fff;
     }
-
     input:focus {
         outline: none;
     }
-
     .btn {
         line-height: initial;
         display: inline-block;
@@ -83,11 +79,9 @@
             background: $primary-active-color;
         }
     }
-
     h3 {
         font-size: 24px;
     }
-
     .VueCarousel {
         .VueCarousel-navigation {
             .VueCarousel-navigation-button {
@@ -104,7 +98,6 @@
             }
         }
     }
-    
     body.no-scroll {
         position: fixed !important;
         overflow-y: scroll !important;
